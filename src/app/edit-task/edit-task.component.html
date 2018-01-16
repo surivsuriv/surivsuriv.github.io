@@ -1,0 +1,29 @@
+<h1>Редактирование задачи</h1><br>
+<div class="row">
+  <div class="col-md-8">
+    <form [formGroup]="taskForm" (ngSubmit)="editTask()" novalidate>
+      <br>
+      <div class="input-group row">
+        <label class="col-md-3" for="text" [ngClass]="{'text-danger': taskForm.get('text').invalid && submit}">Текст</label>
+        <div class="col-md-4">
+
+          <input formControlName="text" type="text" name="text" class="form-control" placeholder="Введите текст" aria-describedby="basic-addon1">
+        </div>
+        <div class="col-md-4" *ngIf="taskForm.get('text').hasError('required') && submit">
+          <small class="text-danger">
+              Это обязательное поле
+          </small>
+        </div>
+        <div class="col-md-4" *ngIf="(taskForm.get('text').hasError('maxlength')||taskForm.get('text').hasError('minlength')) && submit">
+          <small class="text-danger">
+              Длинна текста должна быть 6-200 символов
+          </small>
+        </div>
+      </div>
+      <br>
+      <input type="checkbox" formControlName="status"> Выполнено
+      <br><br><br>
+      <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+  </div>
+</div>
